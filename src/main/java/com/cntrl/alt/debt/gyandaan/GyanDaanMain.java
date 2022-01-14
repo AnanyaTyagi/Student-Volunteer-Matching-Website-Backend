@@ -9,6 +9,5 @@ public class GyanDaanMain {
 
         public static void main(String[] args){
             SpringApplication.run(GyanDaanMain.class, args);
-            System.out.print("Executed Main Application");
         }
     }
