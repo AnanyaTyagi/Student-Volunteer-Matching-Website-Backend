@@ -1,6 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.entity;
 
-import com.cntrl.alt.debt.gyandaan.dto.StudentPreferences;
+
 import com.cntrl.alt.debt.gyandaan.dto.VolunteerSpecialisation;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -26,21 +26,24 @@ public class Volunteer {
     @Id
     private String emailId;
 
+    private String password;
+
     @Column(name="firstname")
     private String firstName;
 
     @Column(name="lastname")
     private String lastName;
 
-    @Column(name="phone_number")
     private String phoneNumber;
 
     private LocalDate DOB;
 
-    private String password;
-
     @Type(type = "jsonb")
     private VolunteerSpecialisation[] specialisations;
+
+    private int maxHours;
+
+    private int availableHours;
 
     @Column(columnDefinition = "boolean default false")
     private boolean verified;
