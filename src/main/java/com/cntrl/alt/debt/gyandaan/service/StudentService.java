@@ -8,5 +8,5 @@ public interface StudentService {
 
     Student getStudentUsingUsername(String username);
 
-    Student updateStudentRecord(String username, Student student);
+    boolean updateStudentRecord(String username, Student student);
 }

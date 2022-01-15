@@ -1,26 +1,33 @@
 package com.cntrl.alt.debt.gyandaan.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
-import java.util.Map;
+import java.time.LocalDate;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class StudentUpdateRequest {
 
+    @JsonProperty("firstname")
     private String firstName;
 
-    private String lastname;
+    @JsonProperty("lastname")
+    private String lastName;
 
     private String password;
 
-    private Date DOB;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    private LocalDate DOB;
 
+    @JsonProperty("phone_number")
     private String phoneNumber;
 
-    private Map<String, Object> preferences;
+    private StudentPreferences[] preferences;
+
+    private boolean verified;
 }
