@@ -21,11 +21,11 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.STUDENTS_RESOURCE;
+import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.STUDENT_RESOURCE;
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.VERSION_1;
 
 @RestController
-@RequestMapping(VERSION_1 + STUDENTS_RESOURCE)
+@RequestMapping(VERSION_1 + STUDENT_RESOURCE)
 public class StudentController {
 
     @Autowired
@@ -37,7 +37,6 @@ public class StudentController {
     @PostMapping(value = "", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<Void> register(@RequestBody StudentCreationRequest studentCreationRequest ) {
         Student student = modelMapper.map(studentCreationRequest, Student.class);
-        System.out.println(studentCreationRequest.getEmailId() + "**** " + student.getEmailId());
 
         student = studentService.registerStudent(student);
 

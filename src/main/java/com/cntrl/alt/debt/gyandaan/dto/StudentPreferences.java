@@ -1,5 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,5 +18,8 @@ public class StudentPreferences {
 
     private Slots slots;
 
-    private int required_hours;
+    @JsonProperty("required_hours")
+    private int requiredHours;
+
+    private String assignedVolunteer;
 }

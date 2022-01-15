@@ -31,7 +31,6 @@ public class Student {
     @Column(name="lastname")
     private String lastName;
 
-    @Column(name="phone_number")
     private String phoneNumber;
 
     private LocalDate DOB;

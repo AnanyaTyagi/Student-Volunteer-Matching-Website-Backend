@@ -11,22 +11,29 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class StudentCreationRequest {
+public class CreateVolunteerRequest {
 
     @JsonProperty("username")
     private String emailId;
+
+    private String password;
 
     @JsonProperty("firstname")
     private String firstName;
 
     @JsonProperty("lastname")
-    private String lastname;
-
-    private String password;
+    private String lastName;
 
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate DOB;
 
+    @JsonProperty("max_hours")
+    private int maxHours;
+
+    @JsonProperty("available_hours")
+    private int availableHours;
+
     @JsonProperty("phone_number")
     private String phoneNumber;
+
 }
