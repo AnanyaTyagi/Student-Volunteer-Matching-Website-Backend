@@ -18,8 +18,4 @@ public class StudentPreferences {
 
     private Slots slots;
 
-    @JsonProperty("required_hours")
-    private int requiredHours;
-
-    private String assignedVolunteer;
 }
