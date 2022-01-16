@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,5 +26,9 @@ public class StudentResponse {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
-    private StudentPreferences[] preferences;
+    private List<StudentPreferences> preferences;
+
+    private Slots slots;
+
+    private boolean verified;
 }

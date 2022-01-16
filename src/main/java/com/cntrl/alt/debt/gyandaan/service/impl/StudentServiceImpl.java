@@ -33,7 +33,6 @@ public class StudentServiceImpl implements StudentService {
     public boolean updateStudentRecord(String username, Student student) {
         boolean created = true;
         if (studentRepository.existsById(username)) {
-            studentRepository.deleteById(username);
             created = false;
         }
         student.setEmailId(username);

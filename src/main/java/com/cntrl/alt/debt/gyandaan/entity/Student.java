@@ -1,5 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.entity;
 
+import com.cntrl.alt.debt.gyandaan.dto.Slots;
 import com.cntrl.alt.debt.gyandaan.dto.StudentPreferences;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -13,6 +14,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -38,7 +40,10 @@ public class Student {
     private String password;
 
     @Type(type = "jsonb")
-    private StudentPreferences[] preferences;
+    private List<StudentPreferences> preferences;
+
+    @Type(type = "jsonb")
+    private Slots slots;
 
     @Column(columnDefinition = "boolean default false")
     private boolean verified;

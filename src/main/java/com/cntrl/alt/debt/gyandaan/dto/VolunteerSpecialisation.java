@@ -14,6 +14,4 @@ public class VolunteerSpecialisation {
     private String standard;
 
     private String exam;
-
-    private Slots slots;
 }
