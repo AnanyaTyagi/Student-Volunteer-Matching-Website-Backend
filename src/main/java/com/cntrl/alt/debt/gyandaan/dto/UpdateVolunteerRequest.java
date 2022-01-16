@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -33,7 +34,9 @@ public class UpdateVolunteerRequest {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
-    private VolunteerSpecialisation[] specialisations;
+    private List<VolunteerSpecialisation> specialisations;
+
+    private Slots slots;
 
     private boolean verified;
 }

@@ -1,6 +1,7 @@
 package com.cntrl.alt.debt.gyandaan.entity;
 
 
+import com.cntrl.alt.debt.gyandaan.dto.Slots;
 import com.cntrl.alt.debt.gyandaan.dto.VolunteerSpecialisation;
 import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
 import lombok.AllArgsConstructor;
@@ -14,6 +15,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.time.LocalDate;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -39,7 +41,10 @@ public class Volunteer {
     private LocalDate DOB;
 
     @Type(type = "jsonb")
-    private VolunteerSpecialisation[] specialisations;
+    private List<VolunteerSpecialisation> specialisations;
+
+    @Type(type = "jsonb")
+    private Slots slots;
 
     private int maxHours;
 

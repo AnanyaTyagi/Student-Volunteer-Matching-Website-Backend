@@ -15,7 +15,4 @@ public class StudentPreferences {
     private String area;
 
     private String exam;
-
-    private Slots slots;
-
 }
