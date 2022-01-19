@@ -12,5 +12,5 @@ public interface StudentService {
 
     boolean updateStudentRecord(String username, Student student);
 
-    ResponseEntity<LoginResponse> studentLogin(String email, String password);
+   LoginResponse studentLogin(String email, String password);
 }
