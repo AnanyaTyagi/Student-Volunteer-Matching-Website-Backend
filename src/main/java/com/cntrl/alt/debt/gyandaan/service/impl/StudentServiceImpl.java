@@ -2,6 +2,7 @@ package com.cntrl.alt.debt.gyandaan.service.impl;
 
 import com.cntrl.alt.debt.gyandaan.dto.LoginResponse;
 import com.cntrl.alt.debt.gyandaan.entity.Student;
+import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import com.cntrl.alt.debt.gyandaan.repository.StudentRepository;
 import com.cntrl.alt.debt.gyandaan.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,27 +49,24 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public ResponseEntity<LoginResponse> studentLogin(String email, String password) {
+    public LoginResponse studentLogin(String email, String password) {
 
         LoginResponse loginResponse = new LoginResponse();
-        httpHeaders.set("abc", "def");
 
-            Optional<Student> student = studentRepository.findById(email);
-            if (student.isPresent()) {
-                if ((student.get().getPassword()).equals(password)) {
-                    loginResponse.setFirstName(student.get().getFirstName());
-                    loginResponse.setLastName(student.get().getLastName());
-                    loginResponse.setResponse("login successful");
-                    return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.OK);
-                } else {
-                    loginResponse.setResponse("Invalid username or password");
-                    return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.BAD_REQUEST);
-                }
+        Optional<Student> volunteer = studentRepository.findById(email);
 
-                }else {
-        loginResponse.setResponse("user doesn't exist");
-        return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.BAD_REQUEST);
-                  }
+        if ((volunteer.get().getPassword()).equals(password)) {
+            loginResponse.setFirstName(volunteer.get().getFirstName());
+            loginResponse.setLastName(volunteer.get().getLastName());
+            loginResponse.setResponse("login successful");
+            loginResponse.setLoggedIn(true);
+            return loginResponse;
+        } else {
+            loginResponse.setResponse("Invalid username or password");
+            loginResponse.setLoggedIn(false);
+            return loginResponse;
         }
+
+    }
 
 }

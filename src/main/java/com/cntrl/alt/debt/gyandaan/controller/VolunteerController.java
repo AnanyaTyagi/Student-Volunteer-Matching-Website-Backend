@@ -6,6 +6,7 @@ import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import com.cntrl.alt.debt.gyandaan.repository.StudentRepository;
 import com.cntrl.alt.debt.gyandaan.repository.VolunteerRepository;
 import com.cntrl.alt.debt.gyandaan.service.VolunteerService;
+import com.cntrl.alt.debt.gyandaan.service.impl.UserExistenceCheck;
 import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,8 @@ public class VolunteerController {
     @Autowired
     private VolunteerService volunteerService;
 
+    @Autowired
+     private UserExistenceCheck userExistenceCheck;
 
     HttpHeaders responseHeaders=new HttpHeaders();
 
@@ -49,20 +52,20 @@ public class VolunteerController {
     private VolunteerRepository volunteerRepository;
 
 
+
     @PostMapping(value = "/register", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<RegisterResponse> registerVolunteer(@RequestBody CreateVolunteerRequest createVolunteerRequest) {
 
-        responseHeaders.set("MyResponseHeader", "MyValue");
         RegisterResponse registerResponse=new RegisterResponse();
-        Optional<Student> studentCheck = studentRepository.findById(createVolunteerRequest.getEmailId());
-        Optional<Volunteer> volunteerCheck= volunteerRepository.findById(createVolunteerRequest.getEmailId());
+        boolean studentCheck = userExistenceCheck.checkStudent(createVolunteerRequest.getEmailId());
+       boolean volunteerCheck= userExistenceCheck.checkVolunteer(createVolunteerRequest.getEmailId());
 
         //checking if student already exists
-        if(!volunteerCheck.isEmpty()) {
+        if(volunteerCheck) {
             registerResponse.setResponse("User already exists");
             return new ResponseEntity<>(registerResponse, responseHeaders, HttpStatus.BAD_REQUEST);
         }
-        if(!studentCheck.isEmpty()) {
+        if(studentCheck) {
             registerResponse.setResponse("User already exists with another role");
             return new ResponseEntity<>(registerResponse, responseHeaders, HttpStatus.BAD_REQUEST);
         }
@@ -70,11 +73,12 @@ public class VolunteerController {
         Volunteer volunteer = modelMapper.map(createVolunteerRequest, Volunteer.class);
         volunteer = volunteerService.registerVolunteer(volunteer);
 
-       /* URI location = ServletUriComponentsBuilder
+        URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{username}")
                 .buildAndExpand(volunteer.getEmailId())
-                .toUri();*/
+                .toUri();
+        responseHeaders.set("Location", location.toString());
         registerResponse.setResponse("User Registered Successfully");
         return new ResponseEntity<>(registerResponse, responseHeaders, HttpStatus.CREATED);
     }
@@ -107,9 +111,23 @@ public class VolunteerController {
     @PostMapping(value="/login", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<LoginResponse> loginVolunteer(@RequestBody LoginRequest loginRequest) {
 
+        HttpHeaders httpHeaders=new HttpHeaders();
+        LoginResponse loginResponse=new LoginResponse();
         String email=loginRequest.getEmail();
         String password=loginRequest.getPassword();
-        return volunteerService.volunteerLogin(email, password);
+
+        boolean checkIfUserExists= userExistenceCheck.checkVolunteer(email);
+        if(!checkIfUserExists){
+            loginResponse.setResponse("user doesn't exist");
+            loginResponse.setLoggedIn(false);
+            return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.BAD_REQUEST);
+
+        }
+         loginResponse =volunteerService.volunteerLogin(email, password);
+        if(loginResponse.isLoggedIn())
+        return new ResponseEntity<>(loginResponse, responseHeaders, HttpStatus.OK);
+        else
+            return new ResponseEntity<>(loginResponse, responseHeaders, HttpStatus.BAD_REQUEST);
 
     }
 }

@@ -12,4 +12,5 @@ public class LoginResponse {
     String firstName;
     String lastName;
     String response;
+    boolean loggedIn;
 }

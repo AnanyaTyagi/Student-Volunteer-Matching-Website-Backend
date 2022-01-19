@@ -12,5 +12,5 @@ public interface VolunteerService {
 
     boolean updateVolunteer(String username, Volunteer volunteer);
 
-    ResponseEntity<LoginResponse> volunteerLogin(String email, String password);
+    LoginResponse volunteerLogin(String email, String password);
 }

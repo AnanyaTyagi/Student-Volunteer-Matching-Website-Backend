@@ -49,26 +49,24 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public ResponseEntity<LoginResponse> volunteerLogin(String email, String password) {
+    public LoginResponse volunteerLogin(String email, String password) {
 
         LoginResponse loginResponse = new LoginResponse();
-        httpHeaders.set("abc", "def");
 
         Optional<Volunteer> volunteer = volunteerRepository.findById(email);
-        if (volunteer.isPresent()) {
+
             if ((volunteer.get().getPassword()).equals(password)) {
                 loginResponse.setFirstName(volunteer.get().getFirstName());
                 loginResponse.setLastName(volunteer.get().getLastName());
                 loginResponse.setResponse("login successful");
-                return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.OK);
+                loginResponse.setLoggedIn(true);
+                return loginResponse;
             } else {
                 loginResponse.setResponse("Invalid username or password");
-                return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.BAD_REQUEST);
+                loginResponse.setLoggedIn(false);
+                return loginResponse;
             }
 
-        }else {
-            loginResponse.setResponse("user doesn't exist");
-            return new ResponseEntity<LoginResponse>(loginResponse, httpHeaders, HttpStatus.BAD_REQUEST);
-        }
+
     }
 }
