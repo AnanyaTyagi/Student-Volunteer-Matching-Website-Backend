@@ -4,11 +4,14 @@ import com.cntrl.alt.debt.gyandaan.entity.Student;
 import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import com.cntrl.alt.debt.gyandaan.repository.StudentRepository;
 import com.cntrl.alt.debt.gyandaan.repository.VolunteerRepository;
-import org.apache.tomcat.jni.User;
+import com.cntrl.alt.debt.gyandaan.service.StudentService;
+import com.cntrl.alt.debt.gyandaan.service.UserExistenceCheck;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class UserExistenceCheckImpl implements UserExistenceCheck {
 
     @Autowired
