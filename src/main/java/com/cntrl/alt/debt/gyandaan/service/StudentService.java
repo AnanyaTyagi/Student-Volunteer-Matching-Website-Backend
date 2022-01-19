@@ -2,7 +2,6 @@ package com.cntrl.alt.debt.gyandaan.service;
 
 import com.cntrl.alt.debt.gyandaan.dto.LoginResponse;
 import com.cntrl.alt.debt.gyandaan.entity.Student;
-import org.springframework.http.ResponseEntity;
 
 public interface StudentService {
 
@@ -13,4 +12,5 @@ public interface StudentService {
     boolean updateStudentRecord(String username, Student student);
 
    LoginResponse studentLogin(String email, String password);
+   
 }

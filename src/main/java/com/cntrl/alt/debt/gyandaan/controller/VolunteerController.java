@@ -1,13 +1,12 @@
 package com.cntrl.alt.debt.gyandaan.controller;
 
 import com.cntrl.alt.debt.gyandaan.dto.*;
-import com.cntrl.alt.debt.gyandaan.entity.Student;
 import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import com.cntrl.alt.debt.gyandaan.repository.StudentRepository;
 import com.cntrl.alt.debt.gyandaan.repository.VolunteerRepository;
+import com.cntrl.alt.debt.gyandaan.service.StudentService;
+import com.cntrl.alt.debt.gyandaan.service.UserExistenceCheck;
 import com.cntrl.alt.debt.gyandaan.service.VolunteerService;
-import com.cntrl.alt.debt.gyandaan.service.impl.UserExistenceCheck;
-import org.json.JSONObject;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.VERSION_1;
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.VOLUNTEER_RESOURCE;

@@ -2,12 +2,10 @@ package com.cntrl.alt.debt.gyandaan.controller;
 
 import com.cntrl.alt.debt.gyandaan.dto.*;
 import com.cntrl.alt.debt.gyandaan.entity.Student;
-import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import com.cntrl.alt.debt.gyandaan.repository.StudentRepository;
 import com.cntrl.alt.debt.gyandaan.repository.VolunteerRepository;
 import com.cntrl.alt.debt.gyandaan.service.StudentService;
-import com.cntrl.alt.debt.gyandaan.service.impl.UserExistenceCheck;
-import org.json.JSONObject;
+import com.cntrl.alt.debt.gyandaan.service.UserExistenceCheck;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,7 +22,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.STUDENT_RESOURCE;
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.VERSION_1;
@@ -49,7 +46,7 @@ public class StudentController {
     HttpHeaders responseHeaders=new HttpHeaders();
 
    @Autowired
-    UserExistenceCheck userExistenceCheck;
+   UserExistenceCheck userExistenceCheck;
 
     @PostMapping(value ="/register", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<RegisterResponse> register(@RequestBody StudentCreationRequest studentCreationRequest ) {
