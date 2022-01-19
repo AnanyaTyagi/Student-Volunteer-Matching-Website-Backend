@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 
 import static com.cntrl.alt.debt.gyandaan.utils.APIConstants.STUDENT_RESOURCE;
@@ -49,7 +50,7 @@ public class StudentController {
    UserExistenceCheck userExistenceCheck;
 
     @PostMapping(value ="/register", consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<RegisterResponse> register(@RequestBody StudentCreationRequest studentCreationRequest ) {
+    public ResponseEntity<RegisterResponse> register(@Valid @RequestBody StudentCreationRequest studentCreationRequest ) {
 
 
         RegisterResponse registerResponse=new RegisterResponse();

@@ -13,6 +13,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,18 +28,22 @@ import java.util.List;
 public class Student {
 
     @Id
+    @Email
     private String emailId;
 
-    @Column(name="firstname")
+    @Column(name="firstname", nullable = false)
     private String firstName;
 
-    @Column(name="lastname")
+    @Column(name="lastname", nullable = false)
     private String lastName;
 
+    @Column(name="phone_number",length = 10,nullable = false)
     private String phoneNumber;
 
+   @Column(name="dob", nullable = false)
     private LocalDate DOB;
 
+   @NotEmpty
     private String password;
 
     @Type(type = "jsonb")
