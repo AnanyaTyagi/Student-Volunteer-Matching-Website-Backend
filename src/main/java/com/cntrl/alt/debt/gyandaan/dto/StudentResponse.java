@@ -26,8 +26,6 @@ public class StudentResponse {
     @JsonProperty("phone_number")
     private String phoneNumber;
 
-    private List<StudentPreferences> preferences;
-
     private Slots slots;
 
     private boolean verified;
