@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -13,17 +14,17 @@ import java.util.ArrayList;
 public class Slots {
 
     @JsonProperty("Mon")
-    public ArrayList<String> mon;
+    public List<String> mon;
     @JsonProperty("Tues")
-    public ArrayList<String> tues;
+    public List<String> tues;
     @JsonProperty("Wed")
-    public ArrayList<String> wed;
+    public List<String> wed;
     @JsonProperty("Thurs")
-    public ArrayList<String> thurs;
+    public List<String> thurs;
     @JsonProperty("Fri")
-    public ArrayList<String> fri;
+    public List<String> fri;
     @JsonProperty("Sat")
-    public ArrayList<String> sat;
+    public List<String> sat;
     @JsonProperty("Sun")
-    public ArrayList<String> sun;
+    public List<String> sun;
 }
