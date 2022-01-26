@@ -40,9 +40,6 @@ public class Student {
     private String password;
 
     @Type(type = "jsonb")
-    private List<StudentPreferences> preferences;
-
-    @Type(type = "jsonb")
     private Slots slots;
 
     @Column(columnDefinition = "boolean default false")
