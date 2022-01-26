@@ -5,12 +5,19 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class LoginRequest {
-    @JsonProperty("email")
+
+    @Email
+    @NotEmpty
+    @JsonProperty("username")
     String email;
-    @JsonProperty("password")
+
+    @NotEmpty
     String password;
 }
