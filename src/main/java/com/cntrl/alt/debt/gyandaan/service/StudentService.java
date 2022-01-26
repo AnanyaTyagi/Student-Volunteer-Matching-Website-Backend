@@ -1,5 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.service;
 
+import com.cntrl.alt.debt.gyandaan.dto.LoginRequest;
 import com.cntrl.alt.debt.gyandaan.dto.LoginResponse;
 import com.cntrl.alt.debt.gyandaan.entity.Student;
 
@@ -11,6 +12,7 @@ public interface StudentService {
 
     boolean updateStudentRecord(String username, Student student);
 
-   LoginResponse studentLogin(String email, String password);
-   
+    boolean studentLogin(LoginRequest loginRequest);
+
+    Student getStudentIfExists(String email);
 }

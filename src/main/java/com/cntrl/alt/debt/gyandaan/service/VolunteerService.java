@@ -1,5 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.service;
 
+import com.cntrl.alt.debt.gyandaan.dto.LoginRequest;
 import com.cntrl.alt.debt.gyandaan.dto.LoginResponse;
 import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +13,7 @@ public interface VolunteerService {
 
     boolean updateVolunteer(String username, Volunteer volunteer);
 
-    LoginResponse volunteerLogin(String email, String password);
+    boolean volunteerLogin(LoginRequest loginRequest);
+
+    Volunteer getVolunteerIfExists(String email);
 }

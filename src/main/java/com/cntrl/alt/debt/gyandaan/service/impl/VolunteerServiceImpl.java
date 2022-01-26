@@ -1,5 +1,6 @@
 package com.cntrl.alt.debt.gyandaan.service.impl;
 
+import com.cntrl.alt.debt.gyandaan.dto.LoginRequest;
 import com.cntrl.alt.debt.gyandaan.dto.LoginResponse;
 import com.cntrl.alt.debt.gyandaan.entity.Student;
 import com.cntrl.alt.debt.gyandaan.entity.Volunteer;
@@ -13,26 +14,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+
 @Service
 public class VolunteerServiceImpl implements VolunteerService {
 
     @Autowired
     private VolunteerRepository volunteerRepository;
 
-
-    HttpHeaders httpHeaders=new HttpHeaders();
     @Override
     public Volunteer registerVolunteer(Volunteer volunteer) {
-        return volunteerRepository.save(volunteer) ;
+        return volunteerRepository.save(volunteer);
     }
 
     @Override
     public Volunteer getVolunteerByUsername(String username) {
         Optional<Volunteer> optional = volunteerRepository.findById(username);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             return optional.get();
-        }
-        else {
+        } else {
             return null;
         }
     }
@@ -40,7 +39,7 @@ public class VolunteerServiceImpl implements VolunteerService {
     @Override
     public boolean updateVolunteer(String username, Volunteer volunteer) {
         boolean created = true;
-        if(volunteerRepository.existsById(username)) {
+        if (volunteerRepository.existsById(username)) {
             created = false;
         }
         volunteer.setEmailId(username);
@@ -49,24 +48,20 @@ public class VolunteerServiceImpl implements VolunteerService {
     }
 
     @Override
-    public LoginResponse volunteerLogin(String email, String password) {
+    public boolean volunteerLogin(LoginRequest loginRequest) {
+        Volunteer volunteer = getVolunteerIfExists(loginRequest.getEmail());
 
-        LoginResponse loginResponse = new LoginResponse();
+        if(volunteer == null || !volunteer.getPassword().equals(loginRequest.getPassword())) {
+            return false;
+        }
+        return true;
+    }
 
-        Optional<Volunteer> volunteer = volunteerRepository.findById(email);
-
-            if ((volunteer.get().getPassword()).equals(password)) {
-                loginResponse.setFirstName(volunteer.get().getFirstName());
-                loginResponse.setLastName(volunteer.get().getLastName());
-                loginResponse.setResponse("login successful");
-                loginResponse.setLoggedIn(true);
-                return loginResponse;
-            } else {
-                loginResponse.setResponse("Invalid username or password");
-                loginResponse.setLoggedIn(false);
-                return loginResponse;
-            }
-
-
+    public Volunteer getVolunteerIfExists(String email) {
+        Optional<Volunteer> optional = volunteerRepository.findById(email);
+        if (optional.isPresent()) {
+            return optional.get();
+        }
+        return null;
     }
 }
